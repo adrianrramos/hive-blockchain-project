@@ -17,7 +17,7 @@ How the project was built
 
 # RUN THIS PROJECT
 
-### `git clone`
+### `git clone git@github.com:ramos-codes/hive-blockchain-project.git`
 
 ### `npm install`
 
