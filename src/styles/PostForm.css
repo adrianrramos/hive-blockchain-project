@@ -1,0 +1,55 @@
+.post-form-container {
+  width: 80%;
+  margin: 30px auto;
+  padding: 0 30px;
+  background-color: white;
+  box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1);
+  transition: display 500ms ease;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form > * {
+  border: none;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.post-form > *:focus {
+  outline: 1px solid black;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.post-body {
+  height: 200px;
+  font-weight: 600;
+  resize: none;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.activity-sidebar {
+  margin: 15px 30px;
+}
+
+@media only screen and (max-width: 1100px) {
+}
+
+@media only screen and (max-width: 650px) {
+  .post-form-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}

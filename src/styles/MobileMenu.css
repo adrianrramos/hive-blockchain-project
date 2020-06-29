@@ -1,0 +1,18 @@
+.mb-menu-container {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .mb-menu-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+  }
+
+  .list-content {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

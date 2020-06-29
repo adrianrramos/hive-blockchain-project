@@ -1,0 +1,33 @@
+blockquote {
+  border-left: 4px solid #ccc;
+  margin: 0 10px;
+  padding: 0.5em 10px;
+}
+
+code > span {
+  font-family: "Courier New", Courier, monospace;
+}
+
+code {
+  color: crimson;
+  background-color: #f1f1f1;
+  margin: 0;
+  line-height: -10px;
+  padding: 2px;
+}
+
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+#post-btn {
+  font-weight: 800;
+  letter-spacing: 0.6px;
+}
+
+@media only screen and (max-width: 650px) {
+  .css-t12sj4 {
+    margin: 0 !important;
+  }
+}
