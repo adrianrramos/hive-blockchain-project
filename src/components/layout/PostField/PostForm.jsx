@@ -1,15 +1,16 @@
 import React, { Fragment, useState } from "react";
+import { uuid } from "uuidv4";
 import { connect } from "react-redux";
 import { submitPostForm } from "../../../redux/actions/userAction";
 
 import PostBody from "./PostBody";
-import PostSubmitButton from "./PostSubmitButton";
+import SubmitButton from "./SubmitButton";
 
 import "../../../styles/PostForm.css";
 
 const PostForm = ({ submitPostForm }) => {
   const [title, setTitle] = useState(localStorage.getItem("post_title") || "");
-  const [body, setBody] = useState(
+  const [slateBody, setSlateBody] = useState(
     JSON.parse(localStorage.getItem("post_body")) || INITIAL_BODY
   );
   const [tags, setTags] = useState(
@@ -22,7 +23,7 @@ const PostForm = ({ submitPostForm }) => {
   );
 
   const setNewBody = bodyJSON => {
-    setBody(bodyJSON);
+    setSlateBody(bodyJSON);
 
     localStorage.setItem("post_body", JSON.stringify(bodyJSON));
   };
@@ -30,16 +31,26 @@ const PostForm = ({ submitPostForm }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const postData = {
+    if (tags.length < 1) tags[0] = "unban";
+
+    const body = document.getElementById("editable-component").innerHTML;
+
+    const postData = [
+      "",
+      tags[0],
+      uuid(),
       title,
       body,
-      jsonMetaData: JSON.stringify({
+      JSON.stringify({
         tags,
         app: "unban.com",
         banned,
         content_domain: window.location.origin,
       }),
-    };
+      (err, result) => {
+        console.log(err, result);
+      },
+    ];
 
     submitPostForm(postData);
   };
@@ -59,7 +70,7 @@ const PostForm = ({ submitPostForm }) => {
               setTitle(value);
             }}
           />
-          <PostBody updateBody={setNewBody} bodyValue={body} />
+          <PostBody updateBody={setNewBody} bodyValue={slateBody} />
           <input
             type="text"
             className="post-tags"
@@ -82,7 +93,7 @@ const PostForm = ({ submitPostForm }) => {
               setBanned(bannedValue);
             }}
           />
-          <PostSubmitButton />
+          <SubmitButton />
         </form>
       </div>
     </Fragment>

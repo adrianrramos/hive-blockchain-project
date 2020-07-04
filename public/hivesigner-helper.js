@@ -1,5 +1,5 @@
 //change details about your app
-const client = new hivesigner.Client({
+var client = new hivesigner.Client({
   app: "fbslo-b",
   callbackURL: "http://localhost:3000/posts/",
   scope: ["vote", "comment"],
@@ -19,16 +19,16 @@ function hs_helper_isUserSaved() {
   setAccessToken();
 }
 
-function hs_helper_login() {
+function hs_helper_login(callback) {
   params = {};
   client.login(params, function (err, token) {
-    console.log(err, token);
+    callback(err, token);
   });
 }
 
-function hs_helper_logout() {
+function hs_helper_logout(callback) {
   client.revokeToken(function (err, res) {
-    console.log(err, res);
+    callback(err, res);
   });
   localStorage.removeItem("hs_token");
 }
@@ -45,22 +45,22 @@ function setAccessToken() {
   }
 }
 
-async function hs_helper_get_user_details() {
+async function hs_helper_get_user_details(callback) {
   client.setAccessToken(sessionStorage.hs_token); //add token to client
 
   client.me(function (err, res) {
-    console.log(err, res);
+    callback(err, res);
   });
 }
 
-async function hs_helper_vote(voter, author, permlink, weight) {
+async function hs_helper_vote(voter, author, permlink, weight, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.vote(voter, author, permlink, weight, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
@@ -71,7 +71,8 @@ async function hs_helper_comment(
   permlink,
   title,
   body,
-  jsonMetadata
+  jsonMetadata,
+  callback
 ) {
   client.setAccessToken(sessionStorage.hs_token); //add token to client
   client.comment(
@@ -83,19 +84,19 @@ async function hs_helper_comment(
     body,
     jsonMetadata,
     function (err, res) {
-      console.log(err, res);
+      callback(err, res)
     }
   );
 }
 
-async function hs_helper_delete_comment(author, permlink) {
+async function hs_helper_delete_comment(author, permlink, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.deleteComment(author, permlink, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
@@ -103,7 +104,8 @@ async function hs_helper_custom_json(
   requiredAuths,
   requiredPostingAuths,
   id,
-  json
+  json,
+  callback
 ) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
@@ -111,14 +113,14 @@ async function hs_helper_custom_json(
       err,
       res
     ) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
-async function hs_helper_transfer(to, amount, memo) {
+async function hs_helper_transfer(to, amount, memo, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     const op = [
@@ -131,54 +133,54 @@ async function hs_helper_transfer(to, amount, memo) {
       },
     ];
     hivesigner.sendOperation(op, {}, function (err, result) {
-      console.log(err, result);
+      callback(err, result);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
-async function hs_helper_reblog(account, author, permlink) {
+async function hs_helper_reblog(account, author, permlink, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.reblog(account, author, permlink, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
-async function hs_helper_follow(follower, following) {
+async function hs_helper_follow(follower, following, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.follow(follower, following, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
-async function hs_helper_unfollow(unfollower, unfollowing) {
+async function hs_helper_unfollow(unfollower, unfollowing, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.unfollow(unfollower, unfollowing, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
-async function hs_helper_ignore(follower, following) {
+async function hs_helper_ignore(follower, following, callback) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
     client.ignore(follower, following, function (err, res) {
-      console.log(err, res);
+      callback(err, res);
     });
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }
 
@@ -186,7 +188,8 @@ async function hs_helper_claim_balance(
   account,
   rewardHive,
   rewardHbd,
-  rewardVests
+  rewardVests,
+  callback
 ) {
   let isTokenSet = await setAccessToken();
   if (isTokenSet) {
@@ -196,10 +199,10 @@ async function hs_helper_claim_balance(
       rewardSbd,
       rewardVests,
       function (err, res) {
-        console.log(err, res);
+        callback(err, res);
       }
     );
   } else {
-    console.log("Access token is not available!");
+    callback("Access token is not available!", null);
   }
 }

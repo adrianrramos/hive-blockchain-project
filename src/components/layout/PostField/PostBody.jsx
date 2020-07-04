@@ -43,6 +43,7 @@ const PostBody = ({ updateBody, bodyValue }) => {
         <BlockButton format="bulleted-list" icon="format_list_bulleted" />
       </Toolbar>
       <Editable
+        id="editable-component"
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         placeholder="Write your story…"

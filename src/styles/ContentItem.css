@@ -1,0 +1,30 @@
+.content-card {
+  padding: 5px;
+  margin: 20px 0;
+  background-color: #efefef;
+}
+
+.card-title > h1 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 2px 0;
+}
+
+.card-sub-title {
+  display: flex;
+}
+
+.card-sub-title > h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.card-author {
+  margin-right: 5px !important;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

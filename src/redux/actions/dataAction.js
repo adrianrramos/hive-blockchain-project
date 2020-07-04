@@ -3,7 +3,17 @@ import axios from "axios";
 
 // GET DATA
 export const getTrendingPosts = () => dispatch => {
-  console.log("attempted to grab trending posts");
+  dispatch({ type: LOADING_DATA });
+
+  axios
+    .get("/api/get_trending_posts")
+    .then(res => {
+      dispatch({ type: SET_POSTS, payload: res.data.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: SET_POSTS, payload: [] });
+    });
 };
 
 export const getRecentPosts = () => dispatch => {
@@ -12,7 +22,6 @@ export const getRecentPosts = () => dispatch => {
   axios
     .get("/api/get_recent_posts")
     .then(res => {
-      console.log("API REQUEST WAS MADE");
       dispatch({ type: SET_POSTS, payload: res.data.data });
     })
     .catch(err => {

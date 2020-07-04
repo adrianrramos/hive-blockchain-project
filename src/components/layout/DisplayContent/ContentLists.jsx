@@ -5,10 +5,11 @@ import {
   getTrendingPosts,
   getMyPosts,
 } from "../../../redux/actions/dataAction";
+import ContentItem from "./ContentItem";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const ContentLists = ({
-  posts,
-  filter,
+  data: { posts, filter, loading },
   getRecentPosts,
   getTrendingPosts,
   getMyPosts,
@@ -21,24 +22,26 @@ const ContentLists = ({
     // FIXME: Need to pass a user id to make this request
     filter === "myPosts" && getMyPosts("fakeId");
 
-    // fetchPosts(filter);
     // eslint-disable-next-line
   }, [filter]);
 
   return (
     <Fragment>
-      {posts && posts.length > 0 ? (
-        <p>Need to display data</p> //TODO: Display cards for all posts
+      {loading ? (
+        <LoadingSkeleton />
+      ) : posts && posts.length > 0 ? (
+        posts
+          .reverse()
+          .map(post => <ContentItem post={post} key={post.permlink} />)
       ) : (
-        <p>No posts available</p>
+        <h1>No posts available</h1>
       )}
     </Fragment>
   );
 };
 
 const mapStateToProps = state => ({
-  filter: state.data.filter,
-  posts: state.data.posts,
+  data: state.data,
 });
 
 export default connect(mapStateToProps, {

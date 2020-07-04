@@ -4,7 +4,7 @@ import Portal from "../../util/Portal";
 import Button from "./Button";
 import PostSubmitModal from "./PostSubmitModal";
 
-const PostSubmitButton = () => {
+const SubmitButton = () => {
   const [open, setOpen] = useState(false);
 
   const closePortal = () => {
@@ -25,4 +25,4 @@ const PostSubmitButton = () => {
   );
 };
 
-export default PostSubmitButton;
+export default SubmitButton;

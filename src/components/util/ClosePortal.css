@@ -1,0 +1,10 @@
+.fa-times-circle {
+  border-radius: 50%;
+  transition: all 500ms;
+}
+
+.fa-times-circle:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}

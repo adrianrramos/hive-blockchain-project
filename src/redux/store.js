@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 // Reducers
 import userReducer from "./reducers/userReducer";
 import dataReducer from "./reducers/dataRedudcers";
+import uiReducer from "./reducers/uiReducers";
 
 const initialState = {};
 
@@ -12,6 +13,7 @@ const middleware = [thunk];
 const reducers = combineReducers({
   user: userReducer,
   data: dataReducer,
+  ui: uiReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

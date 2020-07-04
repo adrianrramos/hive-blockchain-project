@@ -28,16 +28,3 @@ const Header = ({ toggleForm }) => {
 };
 
 export default Header;
-
-// OLD LOGIN AND SIGNUP BUTTONS
-// import LoginButton from "./LoginButton";
-// <div className="auth-btns">
-//   <LoginButton />
-//   <a
-//     href="https://signup.hive.io/"
-//     id="signup-btn"
-//     className="global-button"
-//   >
-//     Sign Up
-//   </a>
-// </div>
