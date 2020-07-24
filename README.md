@@ -1,4 +1,4 @@
-# 🚧 THIS PROJECT IS STILL IN DEVELOPMENT AND DOES NOT REPRESENT A FINAL PRODUCT 🚧
+# 🚧 THIS CODE IS IS WRITTEN 100% by Adrian Ramos, and is the only code I can share with prospective employers 🚧
 
 ![a preview gif of the site](./public/design/preview.gif)
 
